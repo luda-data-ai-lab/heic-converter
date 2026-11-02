@@ -2,13 +2,13 @@
 
 [한국어](manual.ko.md)
 
-> This manual is updated with every new feature. Current version: 0.3.0 (GUI window, exe, folder batch)
+> This manual is updated with every new feature. Current version: 0.4.0 (GUI window, exe, folder batch, iPhone photo checks)
 
 ## 1. What it does
 iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JPG or PNG files that open everywhere. Everything runs locally on your PC with no internet access. **Source files are never modified or deleted.**
 
 ## 2. Install and run
-1. Get `HEICConverter.exe` (see "exe 받기" in the README). No installation needed; put it anywhere, e.g. on the desktop.
+1. Download the latest `HEICConverter.exe` from the [Releases](https://github.com/luda-data-ai-lab/heic-converter/releases) page (plus `HEICConverter-cli.exe` if you need the command line). No installation needed; put it anywhere, e.g. on the desktop.
 2. On first run, **"Windows protected your PC"** may appear because the program is not code-signed. Click **More info → Run anyway**.
 3. Three ways to use it:
    - **Window**: double-click `HEICConverter.exe`. Click **Add folder**/**Add files** or drop folders/photos onto the list, pick options, then click **Convert**.
@@ -34,6 +34,13 @@ Options and language are saved to `%APPDATA%\HEICConverter\settings.json` and re
 | Input | Output |
 |---|---|
 | `.heic`, `.heif`, `.hif` (any case) | `.jpg`, `.png` |
+
+### Notes on iPhone photos
+- **Portrait shots**: the iPhone stores landscape pixels plus a rotation tag. The converter rotates the pixels, so every viewer shows them upright. Max size applies to the long edge after rotation.
+- **HDR (10-bit) photos**: JPG/PNG are saved at 8 bits. Tonal steps shrink slightly; on normal screens the difference is hard to see.
+- **Wide color (Display P3)**: the color profile is embedded unchanged, so colors don't wash out. Apps that ignore profiles may show slightly different colors.
+- **HEIC files holding several images**: only the primary image is converted.
+- **Live Photos**: only the photo (.HEIC) is converted; the video (.MOV) is skipped.
 
 ## 4. Conversion options
 | Option | Default | Description |
@@ -87,6 +94,8 @@ Exit codes: 0 = all converted, 1 = some failed or nothing to convert, 2 = no inp
 | "cannot read image" | The file is damaged, or is not really a HEIC file despite its extension. |
 | CLI shows only usage | `HEICConverter-cli.exe` needs a folder argument; run `HEICConverter.exe` for the window. |
 | Korean paths | Supported, including spaces. |
+| Colors look duller than the original | The viewer ignores color profiles. Check with the Windows Photos app or a web browser. |
+| Antivirus blocks the exe | Unsigned exes can be flagged. Make sure it came from Releases, then add an exception. |
 
 ---
 Created by LUDA Research Group · contact@ludaresearch.org

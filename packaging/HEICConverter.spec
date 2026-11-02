@@ -15,7 +15,7 @@ EXCLUDES = [
     "tkinter", "unittest", "pydoc", "pytest",
     "PySide6.QtNetwork", "PySide6.QtQml", "PySide6.QtQuick", "PySide6.QtOpenGL",
     "PySide6.QtPdf", "PySide6.QtSvg", "PySide6.QtDBus", "PySide6.QtSql", "PySide6.QtTest",
-    "PySide6.QtConcurrent", "PySide6.QtXml",
+    "PySide6.QtConcurrent", "PySide6.QtXml", "PIL._avif", "PIL.AvifImagePlugin",
 ]
 
 gui = Analysis(
@@ -37,6 +37,31 @@ cli = Analysis(
     hiddenimports=["pillow_heif"],
     excludes=EXCLUDES + ["PySide6", "shiboken6"],
 )
+
+# Qt pieces the GUI never loads. Software OpenGL alone is ~20 MB on Windows.
+DROP_NAMES = ("opengl32sw", "qt6network", "qt6pdf", "qt6qml", "qt6quick", "qt6svg",
+              "qt6opengl", "qt6virtualkeyboard", "qt6waylandeglclienthw", "_avif", "libavif")
+DROP_DIRS = ("translations", "tls", "networkinformation", "generic", "platforminputcontexts",
+             "iconengines", "qmltooling", "wayland-decoration-client", "wayland-graphics-integration-client",
+             "wayland-shell-integration")
+KEEP_IMAGEFORMATS = ("qico",)
+
+
+def keep(dest: str) -> bool:
+    parts = dest.replace("\\", "/").lower().split("/")
+    name = parts[-1]
+    if any(tag in name for tag in DROP_NAMES):
+        return False
+    if "pyside6" in parts and any(d in parts for d in DROP_DIRS):
+        return False
+    if "imageformats" in parts and not name.startswith(tuple(KEEP_IMAGEFORMATS + ("libqico",))):
+        return False
+    return True
+
+
+for analysis in (gui, cli):
+    analysis.binaries = [entry for entry in analysis.binaries if keep(entry[0])]
+    analysis.datas = [entry for entry in analysis.datas if keep(entry[0])]
 
 for analysis, name, console in ((gui, "HEICConverter", False), (cli, "HEICConverter-cli", True)):
     pyz = PYZ(analysis.pure)

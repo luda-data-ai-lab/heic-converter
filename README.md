@@ -10,7 +10,8 @@
 ## exe 받기
 
 - **GitHub Actions**: 저장소 → Actions → *Build Windows exe* → 최신 실행 → 하단 Artifacts의 `HEICConverter-exe` (zip 안에 `HEICConverter.exe`, `HEICConverter-cli.exe`)
-- **Release**: `v*` 태그를 올리면 Releases 페이지에 두 exe가 첨부됩니다.
+- **Release (권장)**: [Releases](https://github.com/luda-data-ai-lab/heic-converter/releases) 페이지에서 최신 버전의 `HEICConverter.exe`를 받습니다.
+- **소스에서 바로 실행**: `.\scripts\dev.ps1` (창), `.\scripts\dev.ps1 -Cli D:\Photos`, `.\scripts\dev.ps1 -Test`
 - **직접 빌드**: 아래 개발 환경 준비 후 `.\scripts\build.ps1` → `dist\HEICConverter.exe`, `dist\HEICConverter-cli.exe`
 
 ## exe 사용
@@ -53,3 +54,13 @@ convert("IMG_1234.HEIC", "IMG_1234.png",
 
 ---
 Created by LUDA Research Group · contact@ludaresearch.org · MIT License
+
+## 릴리스 (관리자)
+
+1. `src/heic_converter/__init__.py`의 `__version__`과 `pyproject.toml`의 `version`을 올리고 PR로 main에 머지합니다.
+2. 태그를 올립니다.
+   ```powershell
+   git checkout main; git pull
+   git tag v0.4.0; git push origin v0.4.0
+   ```
+3. *Build Windows exe* 워크플로가 exe 2개를 빌드·점검한 뒤 Releases에 자동으로 첨부합니다.

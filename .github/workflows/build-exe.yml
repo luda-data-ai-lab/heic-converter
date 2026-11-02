@@ -34,6 +34,17 @@ jobs:
           if ($LASTEXITCODE -ne 0) { exit 1 }
           if (-not (Test-Path smoke\사진\IMG_0001.jpg)) { throw "output missing" }
           Get-Content smoke\report.csv
+      - name: Smoke test the GUI exe (window opens, converts a dropped folder, exits)
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory -Force gui-smoke\사진 | Out-Null
+          Copy-Item smoke\사진\IMG_0001.HEIC gui-smoke\사진\
+          $env:HEICCONV_SMOKE = "1"
+          $env:HEICCONV_SETTINGS = "$PWD\gui-smoke\settings.json"
+          $p = Start-Process dist\HEICConverter.exe -ArgumentList "`"$PWD\gui-smoke`"" -PassThru
+          if (-not $p.WaitForExit(120000)) { $p.Kill(); throw "GUI exe did not exit" }
+          if ($p.ExitCode -ne 0) { throw "GUI exe exit code $($p.ExitCode)" }
+          if (-not (Test-Path gui-smoke\사진\IMG_0001.jpg)) { throw "GUI output missing" }
       - uses: actions/upload-artifact@v4
         with:
           name: HEICConverter-exe

@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import argparse
+import os
 import sys
 import time
 from pathlib import Path
 
-from PySide6.QtCore import Qt, QUrl
+from PySide6.QtCore import Qt, QTimer, QUrl
 from PySide6.QtGui import QAction, QActionGroup, QDesktopServices, QIcon, QPainter
 from PySide6.QtWidgets import (
     QAbstractItemView,
@@ -520,7 +521,24 @@ def main(argv: list[str] | None = None) -> int:
         # Folders/files dropped onto the exe icon: convert right away with saved options.
         window.add_paths(args.inputs)
         window.start()
+    if os.environ.get("HEICCONV_SMOKE"):
+        _smoke_exit(app, window)
     return app.exec()
+
+
+def _smoke_exit(app: QApplication, window: MainWindow) -> None:
+    """CI check for the frozen exe: exit 0 once the window is up and any run finished cleanly."""
+    def check() -> None:
+        if window.worker:
+            QTimer.singleShot(200, check)
+            return
+        ok = not window.windowIcon().isNull()
+        if window.result is not None:
+            result = window.result
+            ok = ok and result.count(Status.FAILED) == 0 and result.count(Status.OK) > 0
+        app.exit(0 if ok else 3)
+
+    QTimer.singleShot(500, check)
 
 
 if __name__ == "__main__":
