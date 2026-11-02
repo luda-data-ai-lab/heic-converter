@@ -36,7 +36,7 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from heic_converter import __version__
+from heic_converter import __version__, shell
 from heic_converter.batch import BatchResult, ConflictPolicy, FileResult, Status, scan, write_report
 from heic_converter.core import ConvertOptions, MetadataMode, OutputFormat
 from heic_converter.gui.manual import ManualDialog
@@ -206,6 +206,12 @@ class MainWindow(QMainWindow):
         bar = self.menuBar()
         self.menu_file = bar.addMenu("")
         self.act_quit = QAction(self, triggered=self.close)
+        self.act_shell = QAction(self, checkable=True)
+        self.act_shell.setEnabled(shell.supported())
+        self.act_shell.setChecked(shell.is_registered())
+        self.act_shell.toggled.connect(self._toggle_shell)
+        self.menu_file.addAction(self.act_shell)
+        self.menu_file.addSeparator()
         self.menu_file.addAction(self.act_quit)
         self.menu_lang = bar.addMenu("")
         self.lang_group = QActionGroup(self)
@@ -237,6 +243,7 @@ class MainWindow(QMainWindow):
         self.setWindowTitle(t("app_title"))
         self.menu_file.setTitle(t("menu_file"))
         self.act_quit.setText(t("menu_quit"))
+        self.act_shell.setText(t("menu_shell"))
         self.menu_lang.setTitle(t("menu_language"))
         self.menu_help.setTitle(t("menu_help"))
         self.act_manual.setText(t("menu_manual"))
@@ -497,6 +504,18 @@ class MainWindow(QMainWindow):
         dialog.show()
         return dialog
 
+    def _toggle_shell(self, on: bool) -> None:
+        try:
+            if on:
+                shell.register(sys.executable, self.t("shell_verb"))
+            else:
+                shell.unregister()
+        except OSError as exc:
+            QMessageBox.warning(self, self.t("app_title"), str(exc))
+            return
+        QMessageBox.information(self, self.t("app_title"),
+                                self.t("shell_added" if on else "shell_removed"))
+
     def _about(self) -> None:
         QMessageBox.about(self, self.t("menu_about"), self.t("about_text", version=__version__))
 
@@ -512,7 +531,16 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="HEICConverter")
     parser.add_argument("inputs", nargs="*")
     parser.add_argument("--lang", default=None)
+    parser.add_argument("--register-shell", action="store_true", help=argparse.SUPPRESS)
+    parser.add_argument("--unregister-shell", action="store_true", help=argparse.SUPPRESS)
     args, qt_args = parser.parse_known_args(argv if argv is not None else sys.argv[1:])
+    if args.register_shell or args.unregister_shell:
+        # Called by the installer/uninstaller; no window.
+        if args.unregister_shell:
+            shell.unregister()
+        else:
+            shell.register(sys.executable, Translator(args.lang)("shell_verb"))
+        return 0
     app = QApplication.instance() or QApplication([sys.argv[0], *qt_args])
     app.setApplicationName("HEIC Converter")
     window = MainWindow(lang=args.lang)
