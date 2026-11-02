@@ -82,7 +82,6 @@ Options and language are saved to `%APPDATA%\HEICConverter\settings.json` and re
   Names differing only in case (`IMG.HEIC`, `img.heif`) count as the same name.
 - **CSV report** (`--report D:\result.csv`): status (ok/skipped/failed), source, output, failure reason and time per file. Saved so Excel shows Korean correctly.
 - **Stopping**: click **Cancel** (window) or press `Ctrl+C` (command line); files in progress finish, the rest are not converted. No broken files are left.
-
 - **Speed (reference)**: 1,000 12 MP photos → JPG in about 50 s on an 8-core PC (peak memory about 1 GB). Parallel jobs follow your CPU core count automatically (up to 8).
 
 ## 6. Command line options (`HEICConverter-cli.exe`)
