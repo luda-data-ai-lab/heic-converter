@@ -2,7 +2,7 @@
 
 [한국어](manual.ko.md)
 
-> This manual is updated with every new feature. Current version: 0.4.0 (GUI window, exe, folder batch, iPhone photo checks)
+> This manual is updated with every new feature. Current version: 0.5.0 (GUI window, exe, installer, right-click menu, folder batch)
 
 ## 1. What it does
 iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JPG or PNG files that open everywhere. Everything runs locally on your PC with no internet access. **Source files are never modified or deleted.**
@@ -26,9 +26,21 @@ iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JP
 | Progress bar | Files done and estimated time left. |
 | Result table | Status, source, output and message per file; failures in red. |
 | Save CSV report / Open output folder | Enabled when a run finishes. |
-| Menus | **Language**: switch Korean/English instantly · **Help**: this manual, About |
+| Menus | **File**: Add to Explorer right-click menu, Quit · **Language**: switch Korean/English instantly · **Help**: this manual, About |
 
 Options and language are saved to `%APPDATA%\HEICConverter\settings.json` and restored next time.
+
+
+### Installing with the setup program (optional)
+- Run `HEICConverter-Setup-<version>.exe`. It installs for your account only (`%LOCALAPPDATA%\Programs\HEIC Converter`), no admin rights needed.
+- A **HEIC Converter** Start menu entry is created; the desktop icon and the Explorer right-click menu are options during setup.
+- Uninstall: Windows Settings → Apps → HEIC Converter → Uninstall. The right-click menu is removed too.
+
+### Explorer right-click menu
+- Right-click a folder, empty space inside a folder, or a HEIC photo and choose **Convert to JPG/PNG (HEIC Converter)**; the window opens and converts with your last options.
+- On Windows 11 it is under **Show more options** (Shift+F10).
+- For photos the entry appears only when one photo is selected; for many photos convert the folder or drop them onto the window.
+- With the portable exe (not installed), turn it on/off in the window via **File → Add to Explorer right-click menu**. Turn it on again if you move the exe.
 
 ## 3. Supported formats
 | Input | Output |
@@ -70,6 +82,8 @@ Options and language are saved to `%APPDATA%\HEICConverter\settings.json` and re
   Names differing only in case (`IMG.HEIC`, `img.heif`) count as the same name.
 - **CSV report** (`--report D:\result.csv`): status (ok/skipped/failed), source, output, failure reason and time per file. Saved so Excel shows Korean correctly.
 - **Stopping**: click **Cancel** (window) or press `Ctrl+C` (command line); files in progress finish, the rest are not converted. No broken files are left.
+
+- **Speed (reference)**: 1,000 12 MP photos → JPG in about 50 s on an 8-core PC (peak memory about 1 GB). Parallel jobs follow your CPU core count automatically (up to 8).
 
 ## 6. Command line options (`HEICConverter-cli.exe`)
 | Option | Default | Description |

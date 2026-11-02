@@ -113,3 +113,8 @@ def test_manual_dialog_renders(window: MainWindow) -> None:
     dialog = window.show_manual()
     assert "HEIC Converter" in dialog.browser.toPlainText()
     dialog.close()
+
+
+def test_shell_menu_disabled_when_running_from_source(window) -> None:
+    assert not window.act_shell.isEnabled()
+    assert window.act_shell.text()

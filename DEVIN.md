@@ -13,7 +13,7 @@
 2. **배치 처리 + CLI + exe (사용자 요청으로 패키징 앞당김)** — 폴더 스캔(하위 폴더, 확장자, 숨김/0바이트/MOV/AAE 건너뜀), 출력 경로 계산(원본 옆 / 지정 폴더 + 구조 유지), 이름 충돌 정책, 병렬 처리, 취소, 진행 콜백, 결과 CSV. `heic-convert` CLI, PyInstaller 단일 `HEICConverter.exe`(폴더를 아이콘에 끌어다 놓기), `windows-latest` 빌드·스모크·Artifact/Release 워크플로, `scripts\build.ps1`.
 3. **GUI (PySide6) + exe 2종** — 창 `HEICConverter.exe`(콘솔 없음, 아이콘에 끌어다 놓으면 바로 변환) + 명령줄 `HEICConverter-cli.exe`. 단일 창(SPEC 3.4), 드래그앤드롭, 옵션, 진행률/남은 시간, 결과 목록·CSV·폴더 열기, 설정 저장, 한/영 전환, 도움말 메뉴 → 매뉴얼 열기. pytest-qt 스모크 테스트 + 스크린샷.
 4. **exe 마무리** — exe 크기 점검, `scripts\dev.ps1`, 첫 Release(`v0.x`) 안내, 실제 아이폰 사진(P3/HDR/세로) 점검.
-5. **마무리 (선택)** — Inno Setup 설치본(시작 메뉴 바로가기), 탐색기 우클릭 "PNG/JPG로 변환" 메뉴(HKCU, 관리자 권한 불필요), 대용량(1,000장+) 성능 점검, 매뉴얼 PDF.
+5. **마무리** — Inno Setup 설치본(시작 메뉴 바로가기), 탐색기 우클릭 "PNG/JPG로 변환" 메뉴(HKCU, 관리자 권한 불필요), 대용량(1,000장+) 성능 점검, 매뉴얼 PDF.
 
 ## 결정 사항 (제안)
 1. 저장소 이름: `luda-data-ai-lab/heic-converter`

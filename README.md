@@ -10,9 +10,11 @@
 ## exe 받기
 
 - **GitHub Actions**: 저장소 → Actions → *Build Windows exe* → 최신 실행 → 하단 Artifacts의 `HEICConverter-exe` (zip 안에 `HEICConverter.exe`, `HEICConverter-cli.exe`)
-- **Release (권장)**: [Releases](https://github.com/luda-data-ai-lab/heic-converter/releases) 페이지에서 최신 버전의 `HEICConverter.exe`를 받습니다.
+- **Release (권장)**: [Releases](https://github.com/luda-data-ai-lab/heic-converter/releases) 페이지에서 받습니다.
+  - `HEICConverter-Setup-<버전>.exe`: 설치본 (관리자 권한 불필요, 시작 메뉴 + 탐색기 우클릭 메뉴)
+  - `HEICConverter.exe`: 설치 없이 바로 실행 (포터블)
 - **소스에서 바로 실행**: `.\scripts\dev.ps1` (창), `.\scripts\dev.ps1 -Cli D:\Photos`, `.\scripts\dev.ps1 -Test`
-- **직접 빌드**: 아래 개발 환경 준비 후 `.\scripts\build.ps1` → `dist\HEICConverter.exe`, `dist\HEICConverter-cli.exe`
+- **직접 빌드**: 아래 개발 환경 준비 후 `.\scripts\build.ps1` → `dist\HEICConverter.exe`, `dist\HEICConverter-cli.exe` (`-Installer`를 붙이면 설치본도 생성, [Inno Setup 6](https://jrsoftware.org/isinfo.php) 필요)
 
 ## exe 사용
 
@@ -63,4 +65,4 @@ Created by LUDA Research Group · contact@ludaresearch.org · MIT License
    git checkout main; git pull
    git tag v0.4.0; git push origin v0.4.0
    ```
-3. *Build Windows exe* 워크플로가 exe 2개를 빌드·점검한 뒤 Releases에 자동으로 첨부합니다.
+3. *Build Windows exe* 워크플로가 exe 2개와 설치본을 빌드·점검한 뒤 Releases에 자동으로 첨부합니다.
