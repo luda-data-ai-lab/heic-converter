@@ -1,5 +1,5 @@
 ﻿# HEICConverter.exe 로컬 빌드 (Windows PowerShell 5.1+)
-#   .\scripts\build.ps1          -> dist\HEICConverter.exe
+#   .\scripts\build.ps1          -> dist\HEICConverter.exe (GUI), dist\HEICConverter-cli.exe
 #   .\scripts\build.ps1 -Clean   -> build/dist 폴더를 지우고 다시 빌드
 param([switch]$Clean)
 $ErrorActionPreference = "Stop"
@@ -22,8 +22,8 @@ if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 uv run pyinstaller --noconfirm --distpath dist --workpath build packaging/HEICConverter.spec
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
+& (Join-Path (Get-Location) "dist\HEICConverter-cli.exe") --version
 $exe = Join-Path (Get-Location) "dist\HEICConverter.exe"
-& $exe --version
 Write-Host ""
 Write-Host "완료: $exe" -ForegroundColor Green
-Write-Host "사용: HEIC 폴더를 HEICConverter.exe 아이콘 위에 끌어다 놓으세요."
+Write-Host "사용: HEICConverter.exe를 더블클릭하거나, HEIC 폴더를 아이콘 위에 끌어다 놓으세요."

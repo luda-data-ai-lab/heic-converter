@@ -2,7 +2,7 @@
 
 [한국어](manual.ko.md)
 
-> This manual is updated with every new feature. Current version: 0.2.0 (exe, folder batch)
+> This manual is updated with every new feature. Current version: 0.3.0 (GUI window, exe, folder batch)
 
 ## 1. What it does
 iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JPG or PNG files that open everywhere. Everything runs locally on your PC with no internet access. **Source files are never modified or deleted.**
@@ -10,10 +10,25 @@ iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JP
 ## 2. Install and run
 1. Get `HEICConverter.exe` (see "exe 받기" in the README). No installation needed; put it anywhere, e.g. on the desktop.
 2. On first run, **"Windows protected your PC"** may appear because the program is not code-signed. Click **More info → Run anyway**.
-3. Two ways to convert:
-   - **Drag and drop**: drop a folder or HEIC files onto the `HEICConverter.exe` icon. A console window shows progress; press Enter to close it when done.
-   - **Command line**: in PowerShell run e.g. `.\HEICConverter.exe D:\Photos\iPhone`. `--help` lists every option.
+3. Three ways to use it:
+   - **Window**: double-click `HEICConverter.exe`. Click **Add folder**/**Add files** or drop folders/photos onto the list, pick options, then click **Convert**.
+   - **Drop on the icon**: drop a folder or HEIC files onto the `HEICConverter.exe` icon; the window opens and starts converting with your last saved options.
+   - **Command line**: in PowerShell run e.g. `.\HEICConverter-cli.exe D:\Photos\iPhone`. `--help` lists every option (section 6).
 4. Default: scans all subfolders and writes **JPG next to each original** (quality 92, GPS location removed).
+
+### The window
+| Area | Description |
+|---|---|
+| Add folder / Add files / Remove selected / Clear list | Manage what to convert. The number of HEIC files found is shown below the list. |
+| Include subfolders | Turn off to convert only photos directly inside the selected folders. |
+| Options | Format, JPG quality, max size, metadata, same-name handling, save location (sections 4–5). Quality is disabled for PNG. |
+| Convert / Cancel | Cancel finishes the photos in progress, then stops. |
+| Progress bar | Files done and estimated time left. |
+| Result table | Status, source, output and message per file; failures in red. |
+| Save CSV report / Open output folder | Enabled when a run finishes. |
+| Menus | **Language**: switch Korean/English instantly · **Help**: this manual, About |
+
+Options and language are saved to `%APPDATA%\HEICConverter\settings.json` and restored next time.
 
 ## 3. Supported formats
 | Input | Output |
@@ -47,9 +62,9 @@ iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JP
   | `overwrite` | Replaces the existing file. |
   Names differing only in case (`IMG.HEIC`, `img.heif`) count as the same name.
 - **CSV report** (`--report D:\result.csv`): status (ok/skipped/failed), source, output, failure reason and time per file. Saved so Excel shows Korean correctly.
-- **Stopping**: press `Ctrl+C`; files in progress finish, the rest are not converted. No broken files are left.
+- **Stopping**: click **Cancel** (window) or press `Ctrl+C` (command line); files in progress finish, the rest are not converted. No broken files are left.
 
-## 6. Command line options
+## 6. Command line options (`HEICConverter-cli.exe`)
 | Option | Default | Description |
 |---|---|---|
 | `-f`, `--format` | `jpg` | `jpg` or `png` |
@@ -70,7 +85,7 @@ Exit codes: 0 = all converted, 1 = some failed or nothing to convert, 2 = no inp
 | Symptom | Fix |
 |---|---|
 | "cannot read image" | The file is damaged, or is not really a HEIC file despite its extension. |
-| Window shows only usage | Double-clicking without input only shows usage; drop a folder onto the icon. |
+| CLI shows only usage | `HEICConverter-cli.exe` needs a folder argument; run `HEICConverter.exe` for the window. |
 | Korean paths | Supported, including spaces. |
 
 ---
