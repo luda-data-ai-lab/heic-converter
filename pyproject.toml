@@ -1,6 +1,6 @@
 [project]
 name = "heic-converter"
-version = "0.2.0"
+version = "0.3.0"
 description = "Batch-convert iPhone HEIC/HEIF photos to JPG/PNG on Windows"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
@@ -9,13 +9,17 @@ authors = [{ name = "LUDA Research Group", email = "contact@ludaresearch.org" }]
 dependencies = [
     "pillow>=11.0,<12",
     "pillow-heif>=1.0,<2",
+    "pyside6-essentials>=6.8,<7",
 ]
 
 [project.scripts]
 heic-convert = "heic_converter.cli:main"
 
+[project.gui-scripts]
+heic-converter = "heic_converter.gui.app:main"
+
 [dependency-groups]
-dev = ["pytest>=8", "ruff>=0.8"]
+dev = ["pytest>=8", "pytest-qt>=4.4", "ruff>=0.8"]
 build = ["pyinstaller>=6.10,<7"]
 
 [build-system]
@@ -32,5 +36,9 @@ target-version = "py312"
 [tool.ruff.lint]
 select = ["E", "F", "W", "I", "B", "UP"]
 
+[tool.ruff.lint.per-file-ignores]
+"src/heic_converter/i18n/__init__.py" = ["E501"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+qt_api = "pyside6"

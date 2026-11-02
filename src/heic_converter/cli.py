@@ -43,9 +43,15 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def _setup_console() -> None:
+    # A real console renders Unicode natively; redirected output (files, pipes, CI logs)
+    # would otherwise use the ANSI code page and mangle Korean text.
     for stream in (sys.stdout, sys.stderr):
-        if hasattr(stream, "reconfigure"):
+        if stream is None or not hasattr(stream, "reconfigure"):
+            continue
+        if stream.isatty():
             stream.reconfigure(errors="replace")
+        else:
+            stream.reconfigure(encoding="utf-8", errors="replace")
 
 
 def main(argv: list[str] | None = None) -> int:

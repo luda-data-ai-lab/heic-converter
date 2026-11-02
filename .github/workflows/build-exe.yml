@@ -24,20 +24,26 @@ jobs:
       - name: Smoke test the exe
         shell: pwsh
         run: |
-          .\dist\HEICConverter.exe --version
+          .\dist\HEICConverter-cli.exe --version
           if ($LASTEXITCODE -ne 0) { exit 1 }
+          if (-not (Test-Path dist\HEICConverter.exe)) { throw "GUI exe missing" }
+          "{0:N1} MB GUI, {1:N1} MB CLI" -f ((Get-Item dist\HEICConverter.exe).Length / 1MB), ((Get-Item dist\HEICConverter-cli.exe).Length / 1MB)
           New-Item -ItemType Directory -Force smoke\사진 | Out-Null
           uv run python -c "import sys; sys.path.insert(0, '.'); from tests.conftest import make_heic; from pathlib import Path; make_heic(Path('smoke/사진/IMG_0001.HEIC'), gps=True, icc=True)"
-          .\dist\HEICConverter.exe smoke --no-pause --report smoke\report.csv
+          .\dist\HEICConverter-cli.exe smoke --no-pause --report smoke\report.csv
           if ($LASTEXITCODE -ne 0) { exit 1 }
           if (-not (Test-Path smoke\사진\IMG_0001.jpg)) { throw "output missing" }
           Get-Content smoke\report.csv
       - uses: actions/upload-artifact@v4
         with:
           name: HEICConverter-exe
-          path: dist/HEICConverter.exe
+          path: |
+            dist/HEICConverter.exe
+            dist/HEICConverter-cli.exe
       - name: Attach to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
-          files: dist/HEICConverter.exe
+          files: |
+            dist/HEICConverter.exe
+            dist/HEICConverter-cli.exe
