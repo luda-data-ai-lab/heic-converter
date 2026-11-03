@@ -2,7 +2,7 @@
 
 [English](manual.en.md)
 
-> 이 매뉴얼은 기능이 추가될 때마다 함께 갱신됩니다. 현재 버전: 0.5.1 (창 GUI · exe · 설치본 · 우클릭 메뉴 · 폴더 일괄 변환)
+> 이 매뉴얼은 기능이 추가될 때마다 함께 갱신됩니다. 현재 버전: 0.5.2 (창 GUI · exe · 설치본 · 우클릭 메뉴 · 폴더 일괄 변환)
 
 ## 1. 이 프로그램은
 아이폰은 기본 설정에서 사진을 HEIC(HEIF) 형식으로 저장합니다. HEIC Converter는 이 파일을 어디서나 열리는 JPG나 PNG로 바꿔 줍니다. 모든 처리는 PC 안에서만 이루어지고 인터넷을 사용하지 않습니다. **원본 파일은 절대 수정하거나 삭제하지 않습니다.**
@@ -116,4 +116,4 @@
 - 원문은 **도움말 → 라이선스** 메뉴와 설치 폴더의 `LICENSE.txt`에서 볼 수 있습니다. 함께 들어 있는 오픈소스 라이브러리(libheif, libde265, Qt 등)의 라이선스는 `THIRD-PARTY-NOTICES.txt`에 있습니다.
 
 ---
-Created by Devin Amber James Yeon · james.jewoo.yeon@gmail.com
+Created by Devin Ambassador James Yeon · james.jewoo.yeon@gmail.com

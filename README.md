@@ -62,7 +62,7 @@ convert("IMG_1234.HEIC", "IMG_1234.png",
 함께 들어 있는 오픈소스 라이브러리(libheif, Qt 등)의 라이선스는 [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)를 보세요.
 
 ---
-Created by Devin Amber James Yeon · james.jewoo.yeon@gmail.com · PolyForm Noncommercial 1.0.0
+Created by Devin Ambassador James Yeon · james.jewoo.yeon@gmail.com · PolyForm Noncommercial 1.0.0
 
 ## 릴리스 (관리자)
 
