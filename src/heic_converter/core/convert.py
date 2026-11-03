@@ -8,10 +8,10 @@ from dataclasses import dataclass
 from enum import StrEnum
 from pathlib import Path
 
-import pillow_heif
+import pi_heif
 from PIL import Image, ImageOps, UnidentifiedImageError
 
-pillow_heif.register_heif_opener()
+pi_heif.register_heif_opener()
 
 HEIF_EXTENSIONS = frozenset({".heic", ".heif", ".hif"})
 

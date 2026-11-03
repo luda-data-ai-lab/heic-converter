@@ -9,7 +9,7 @@ import pillow_heif
 from PIL import Image, ImageCms
 
 from heic_converter.core import ConvertOptions, OutputFormat, convert
-from tests.conftest import make_heic
+from tests.conftest import make_heic, write_heic
 
 
 def _p3_like_profile() -> bytes:
@@ -50,7 +50,7 @@ def test_multi_image_container_uses_primary(tmp_path: Path) -> None:
 def test_wide_gamut_icc_passes_through_unchanged(tmp_path: Path) -> None:
     profile = _p3_like_profile()
     src = tmp_path / "IMG_P3.HEIC"
-    Image.new("RGB", (40, 30), (10, 200, 90)).save(src, format="HEIF", icc_profile=profile)
+    write_heic(Image.new("RGB", (40, 30), (10, 200, 90)), src, icc_profile=profile)
     for fmt in (OutputFormat.JPG, OutputFormat.PNG):
         out = convert(src, tmp_path / f"out.{fmt.value}", ConvertOptions(format=fmt))
         with Image.open(out) as im:

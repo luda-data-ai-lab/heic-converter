@@ -15,26 +15,29 @@ EXCLUDES = [
     "tkinter", "unittest", "pydoc", "pytest",
     "PySide6.QtNetwork", "PySide6.QtQml", "PySide6.QtQuick", "PySide6.QtOpenGL",
     "PySide6.QtPdf", "PySide6.QtSvg", "PySide6.QtDBus", "PySide6.QtSql", "PySide6.QtTest",
-    "PySide6.QtConcurrent", "PySide6.QtXml", "PIL._avif", "PIL.AvifImagePlugin",
+    "PySide6.QtConcurrent", "PySide6.QtXml", "PIL._avif", "PIL.AvifImagePlugin", "pillow_heif",
 ]
 
 gui = Analysis(
     [str(ROOT / "packaging" / "entry_gui.py")],
     pathex=[str(ROOT / "src")],
-    binaries=collect_dynamic_libs("pillow_heif"),
+    binaries=collect_dynamic_libs("pi_heif"),
     datas=[
         (str(ROOT / "docs" / "manual.ko.md"), "docs"),
         (str(ROOT / "docs" / "manual.en.md"), "docs"),
         (icon, "assets"),
+        (str(ROOT / "LICENSE"), "."),
+        (str(ROOT / "THIRD-PARTY-NOTICES.txt"), "."),
     ],
-    hiddenimports=["pillow_heif"],
+    hiddenimports=["pi_heif"],
     excludes=EXCLUDES,
 )
 cli = Analysis(
     [str(ROOT / "packaging" / "entry_cli.py")],
     pathex=[str(ROOT / "src")],
-    binaries=collect_dynamic_libs("pillow_heif"),
-    hiddenimports=["pillow_heif"],
+    binaries=collect_dynamic_libs("pi_heif"),
+    datas=[(str(ROOT / "LICENSE"), "."), (str(ROOT / "THIRD-PARTY-NOTICES.txt"), ".")],
+    hiddenimports=["pi_heif"],
     excludes=EXCLUDES + ["PySide6", "shiboken6"],
 )
 

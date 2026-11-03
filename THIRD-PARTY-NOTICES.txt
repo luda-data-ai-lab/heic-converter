@@ -1,0 +1,35 @@
+HEIC Converter — third-party software notices
+
+HEIC Converter itself is licensed under the PolyForm Noncommercial License 1.0.0 (see LICENSE).
+That license applies only to HEIC Converter's own code. The components below keep their own
+licenses, and nothing in LICENSE limits your rights under them.
+
+The Windows executables (HEICConverter.exe, HEICConverter-cli.exe) bundle:
+
+1. Python 3.12 — PSF License 2.0
+   https://docs.python.org/3/license.html
+
+2. Pillow — MIT-CMU License (HPND)
+   https://github.com/python-pillow/Pillow/blob/main/LICENSE
+
+3. pi-heif (decoder-only build of pillow-heif) — BSD-3-Clause (Python code)
+   https://github.com/bigcat88/pillow_heif
+   Its binary wheel bundles:
+   - libheif — LGPL-3.0   https://github.com/strukturag/libheif  (source: tag v1.18.1)
+   - libde265 — LGPL-3.0  https://github.com/strukturag/libde265 (source: tag v1.0.15)
+   - MinGW-w64 runtime (libgcc, libstdc++: GPL-3.0 with GCC Runtime Library Exception;
+     libwinpthread: MIT/BSD) https://www.mingw-w64.org/
+   No HEVC encoder (x265) is included.
+
+4. Qt 6 / PySide6 / Shiboken6 (GUI only) — LGPL-3.0
+   https://www.qt.io/licensing/  https://code.qt.io/cgit/pyside/pyside-setup.git/
+
+5. PyInstaller bootloader — GPL-2.0 with the PyInstaller bootloader exception
+   https://github.com/pyinstaller/pyinstaller/blob/develop/COPYING.txt
+
+LGPL-3.0 components are used as unmodified, dynamically loaded libraries. You may replace them
+with your own builds: install the source version (see README, "개발 환경") with uv, swap the
+library in the Python environment, and rebuild with scripts\build.ps1. The full LGPL-3.0 text is
+at https://www.gnu.org/licenses/lgpl-3.0.txt and the GPL-3.0 text it extends at
+https://www.gnu.org/licenses/gpl-3.0.txt. For a copy of the corresponding source code of any
+LGPL component, use the links above or contact contact@ludaresearch.org.

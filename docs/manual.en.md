@@ -2,7 +2,7 @@
 
 [한국어](manual.ko.md)
 
-> This manual is updated with every new feature. Current version: 0.5.0 (GUI window, exe, installer, right-click menu, folder batch)
+> This manual is updated with every new feature. Current version: 0.5.1 (GUI window, exe, installer, right-click menu, folder batch)
 
 ## 1. What it does
 iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JPG or PNG files that open everywhere. Everything runs locally on your PC with no internet access. **Source files are never modified or deleted.**
@@ -109,6 +109,11 @@ Exit codes: 0 = all converted, 1 = some failed or nothing to convert, 2 = no inp
 | Korean paths | Supported, including spaces. |
 | Colors look duller than the original | The viewer ignores color profiles. Check with the Windows Photos app or a web browser. |
 | Antivirus blocks the exe | Unsigned exes can be flagged. Make sure it came from Releases, then add an exception. |
+
+## 8. License
+- HEIC Converter is licensed under the **PolyForm Noncommercial License 1.0.0**. You may download and use it **free of charge for noncommercial purposes only** (individuals, schools, nonprofits, etc.).
+- **Commercial use is not permitted**, including selling or reselling it, bundling it into paid products or services, or using it for company work. Commercial inquiries: contact@ludaresearch.org
+- Read the full text under **Help → License** or in `LICENSE.txt` in the install folder. Licenses of the bundled open-source libraries (libheif, libde265, Qt, ...) are in `THIRD-PARTY-NOTICES.txt`.
 
 ---
 Created by LUDA Research Group · contact@ludaresearch.org

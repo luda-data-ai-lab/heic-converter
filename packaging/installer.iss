@@ -10,6 +10,7 @@ AppName=HEIC Converter
 AppVersion={#AppVersion}
 AppVerName=HEIC Converter {#AppVersion}
 AppPublisher=LUDA Research Group
+AppCopyright=(c) LUDA Research Group - PolyForm Noncommercial 1.0.0
 AppPublisherURL=https://github.com/luda-data-ai-lab/heic-converter
 DefaultDirName={autopf}\HEIC Converter
 DefaultGroupName=HEIC Converter
@@ -45,6 +46,7 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\dist\HEICConverter.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\dist\HEICConverter-cli.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "..\LICENSE"; DestDir: "{app}"; DestName: "LICENSE.txt"; Flags: ignoreversion
+Source: "..\THIRD-PARTY-NOTICES.txt"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{autoprograms}\HEIC Converter"; Filename: "{app}\HEICConverter.exe"

@@ -55,7 +55,14 @@ convert("IMG_1234.HEIC", "IMG_1234.png",
 ```
 
 ---
-Created by LUDA Research Group · contact@ludaresearch.org · MIT License
+## 라이선스
+
+[PolyForm Noncommercial 1.0.0](LICENSE): 개인·학교·비영리 단체 등 **비상업적 용도로만 무료로** 내려받아 쓸 수 있습니다. 판매·재판매, 유료 제품 포함, 회사 업무 등 **상업적 이용은 허용되지 않습니다**. 상업적 이용 문의: contact@ludaresearch.org
+
+함께 들어 있는 오픈소스 라이브러리(libheif, Qt 등)의 라이선스는 [THIRD-PARTY-NOTICES.txt](THIRD-PARTY-NOTICES.txt)를 보세요.
+
+---
+Created by LUDA Research Group · contact@ludaresearch.org · PolyForm Noncommercial 1.0.0
 
 ## 릴리스 (관리자)
 
