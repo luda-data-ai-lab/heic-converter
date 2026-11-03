@@ -6,7 +6,11 @@ import pillow_heif
 import pytest
 from PIL import Image, ImageCms
 
-pillow_heif.register_heif_opener()
+
+def write_heic(image: Image.Image, path: Path, **kwargs) -> Path:
+    """Encode with pillow-heif directly so Pillow's HEIF opener stays the app's pi-heif."""
+    pillow_heif.from_pillow(image).save(path, **kwargs)
+    return path
 
 
 def make_heic(
@@ -32,8 +36,7 @@ def make_heic(
     kwargs: dict = {"exif": exif.tobytes()}
     if icc:
         kwargs["icc_profile"] = ImageCms.ImageCmsProfile(ImageCms.createProfile("sRGB")).tobytes()
-    image.save(path, format="HEIF", quality=90, **kwargs)
-    return path
+    return write_heic(image, path, quality=90, **kwargs)
 
 
 @pytest.fixture

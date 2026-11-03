@@ -16,7 +16,7 @@ text = f"""VSVersionInfo(
       StringStruct('FileDescription', 'HEIC Converter'),
       StringStruct('FileVersion', '{__version__}'),
       StringStruct('InternalName', 'HEICConverter'),
-      StringStruct('LegalCopyright', 'MIT License, LUDA Research Group'),
+      StringStruct('LegalCopyright', '(c) LUDA Research Group, PolyForm Noncommercial 1.0.0'),
       StringStruct('OriginalFilename', 'HEICConverter.exe'),
       StringStruct('ProductName', 'HEIC Converter'),
       StringStruct('ProductVersion', '{__version__}')])]),

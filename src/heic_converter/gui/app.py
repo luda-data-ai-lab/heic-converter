@@ -39,7 +39,7 @@ from PySide6.QtWidgets import (
 from heic_converter import __version__, shell
 from heic_converter.batch import BatchResult, ConflictPolicy, FileResult, Status, scan, write_report
 from heic_converter.core import ConvertOptions, MetadataMode, OutputFormat
-from heic_converter.gui.manual import ManualDialog
+from heic_converter.gui.manual import LicenseDialog, ManualDialog
 from heic_converter.gui.settings import Settings
 from heic_converter.gui.worker import BatchWorker
 from heic_converter.i18n import LANGUAGES, Translator
@@ -225,7 +225,9 @@ class MainWindow(QMainWindow):
         self.menu_help = bar.addMenu("")
         self.act_manual = QAction(self, triggered=self.show_manual)
         self.act_about = QAction(self, triggered=self._about)
+        self.act_license = QAction(self, triggered=self.show_license)
         self.menu_help.addAction(self.act_manual)
+        self.menu_help.addAction(self.act_license)
         self.menu_help.addAction(self.act_about)
 
     def _fill_combo(self, combo: QComboBox, items: list[tuple[str, object]]) -> None:
@@ -248,6 +250,7 @@ class MainWindow(QMainWindow):
         self.menu_help.setTitle(t("menu_help"))
         self.act_manual.setText(t("menu_manual"))
         self.act_about.setText(t("menu_about"))
+        self.act_license.setText(t("menu_license"))
         self.lang_actions[t.lang].setChecked(True)
         self.btn_add_folder.setText(t("add_folder"))
         self.btn_add_files.setText(t("add_files"))
@@ -501,6 +504,11 @@ class MainWindow(QMainWindow):
     # ---------- help ----------
     def show_manual(self) -> ManualDialog:
         dialog = ManualDialog(self.t.lang, self.t("menu_manual"), self)
+        dialog.show()
+        return dialog
+
+    def show_license(self) -> LicenseDialog:
+        dialog = LicenseDialog(self.t("menu_license"), self)
         dialog.show()
         return dialog
 

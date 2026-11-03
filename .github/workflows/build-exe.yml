@@ -76,11 +76,18 @@ jobs:
             dist/HEICConverter.exe
             dist/HEICConverter-cli.exe
             dist/HEICConverter-Setup-*.exe
+      - name: Zip bundle (browsers often block bare unsigned .exe downloads)
+        if: startsWith(github.ref, 'refs/tags/v')
+        shell: pwsh
+        run: |
+          $v = "${{ github.ref_name }}".TrimStart("v")
+          Compress-Archive -Path dist\HEICConverter.exe, dist\HEICConverter-cli.exe, dist\HEICConverter-Setup-*.exe, LICENSE, THIRD-PARTY-NOTICES.txt -DestinationPath "dist\HEICConverter-$v-win64.zip"
       - name: Attach to GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')
         uses: softprops/action-gh-release@v2
         with:
           files: |
+            dist/HEICConverter-*-win64.zip
             dist/HEICConverter.exe
             dist/HEICConverter-cli.exe
             dist/HEICConverter-Setup-*.exe

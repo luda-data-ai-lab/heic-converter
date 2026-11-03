@@ -1,4 +1,4 @@
-"""Help → User manual: render the bundled docs/manual.<lang>.md offline."""
+"""Help → User manual / License: render the bundled docs and license files offline."""
 
 from __future__ import annotations
 
@@ -19,6 +19,27 @@ def manual_path(lang: str) -> Path | None:
         if candidate.exists():
             return candidate
     return None
+
+
+LICENSE_FILES = ("LICENSE", "THIRD-PARTY-NOTICES.txt")
+
+
+def license_text() -> str:
+    root = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parents[3]))
+    parts = [(root / name).read_text(encoding="utf-8") for name in LICENSE_FILES
+             if (root / name).exists()]
+    return ("\n\n" + "=" * 72 + "\n\n").join(parts) or "license not found"
+
+
+class LicenseDialog(QDialog):
+    def __init__(self, title: str, parent: QWidget | None = None) -> None:
+        super().__init__(parent)
+        self.setWindowTitle(title)
+        self.resize(760, 640)
+        self.browser = QTextBrowser(self)
+        self.browser.setPlainText(license_text())
+        layout = QVBoxLayout(self)
+        layout.addWidget(self.browser)
 
 
 class ManualDialog(QDialog):

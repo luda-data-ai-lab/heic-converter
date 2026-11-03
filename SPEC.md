@@ -35,7 +35,7 @@
 - 숨김/시스템 파일, 0바이트 파일은 건너뜀.
 
 ### 3.2 변환
-- 디코딩: `pillow-heif` (libheif), 인코딩: Pillow.
+- 디코딩: `pi-heif` (pillow-heif의 디코더 전용 빌드, libheif + libde265, LGPL — GPL인 x265 인코더 미포함), 인코딩: Pillow.
 - JPG: 알파 채널은 흰색 배경으로 합성, `quality`, `subsampling=4:2:0`(품질 ≥ 95면 4:4:4), progressive 옵션.
 - PNG: 무손실, `optimize` 옵션 (느리지만 작음).
 - 16bit/10bit HDR 이미지 → 8bit로 변환 (PNG는 16bit 유지 옵션은 v2).
@@ -68,7 +68,7 @@
 | 영역 | 기술 |
 |---|---|
 | 언어 | Python 3.12 |
-| 변환 | Pillow, pillow-heif |
+| 변환 | Pillow, pi-heif (테스트용 HEIC 생성만 pillow-heif) |
 | GUI | PySide6 (Qt 6) — 드래그앤드롭, 고해상도(DPI) 대응, 다국어 |
 | 병렬 | `concurrent.futures.ProcessPoolExecutor` (CPU 코어 수 − 1) |
 | 패키징 | PyInstaller (단일 `.exe`), 선택: Inno Setup 설치본 |
