@@ -2,7 +2,7 @@
 
 [한국어](manual.ko.md)
 
-> This manual is updated with every new feature. Current version: 0.5.1 (GUI window, exe, installer, right-click menu, folder batch)
+> This manual is updated with every new feature. Current version: 0.5.2 (GUI window, exe, installer, right-click menu, folder batch)
 
 ## 1. What it does
 iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JPG or PNG files that open everywhere. Everything runs locally on your PC with no internet access. **Source files are never modified or deleted.**
@@ -116,4 +116,4 @@ Exit codes: 0 = all converted, 1 = some failed or nothing to convert, 2 = no inp
 - Read the full text under **Help → License** or in `LICENSE.txt` in the install folder. Licenses of the bundled open-source libraries (libheif, libde265, Qt, ...) are in `THIRD-PARTY-NOTICES.txt`.
 
 ---
-Created by Devin Amber James Yeon · james.jewoo.yeon@gmail.com
+Created by Devin Ambassador James Yeon · james.jewoo.yeon@gmail.com
