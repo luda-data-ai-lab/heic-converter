@@ -2,7 +2,7 @@
 
 [한국어](manual.ko.md)
 
-> This manual is updated with every new feature. Current version: 0.5.2 (GUI window, exe, installer, right-click menu, folder batch)
+> This manual is updated with every new feature. Current version: 0.5.3 (GUI window, exe, installer, right-click menu, folder batch)
 
 ## 1. What it does
 iPhones save photos as HEIC (HEIF) by default. HEIC Converter turns them into JPG or PNG files that open everywhere. Everything runs locally on your PC with no internet access. **Source files are never modified or deleted.**
@@ -34,6 +34,10 @@ Options and language are saved to `%APPDATA%\HEICConverter\settings.json` and re
 ### Installing with the setup program (optional)
 - Run `HEICConverter-Setup-<version>.exe`. It installs for your account only (`%LOCALAPPDATA%\Programs\HEIC Converter`), no admin rights needed.
 - A **HEIC Converter** Start menu entry is created; the desktop icon and the Explorer right-click menu are options during setup.
+- If it is already installed, setup shows the installed and new versions and lets you choose:
+  - **Update / reinstall (keep settings)**: the default; your options and language stay as they are.
+  - **Uninstall, then install fresh (reset settings)**: removes the old version and resets `%APPDATA%\HEICConverter`, then installs again. Use it when something is wrong.
+  - **Uninstall only**: removes the existing version without installing.
 - Uninstall: Windows Settings → Apps → HEIC Converter → Uninstall. The right-click menu is removed too.
 
 ### Explorer right-click menu

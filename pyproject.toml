@@ -1,6 +1,6 @@
 [project]
 name = "heic-converter"
-version = "0.5.2"
+version = "0.5.3"
 description = "Batch-convert iPhone HEIC/HEIF photos to JPG/PNG on Windows"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"

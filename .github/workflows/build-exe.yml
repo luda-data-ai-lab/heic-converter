@@ -54,7 +54,7 @@ jobs:
           & $iscc /Qp "/DAppVersion=$v" packaging\installer.iss
           if ($LASTEXITCODE -ne 0) { exit 1 }
           "SETUP=dist\HEICConverter-Setup-$v.exe" | Out-File -Append $env:GITHUB_ENV
-      - name: Smoke test the installer (install, right-click menu, uninstall)
+      - name: Smoke test the installer (install, update, clean reinstall, uninstall, right-click menu)
         shell: pwsh
         run: |
           $p = Start-Process $env:SETUP -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES", "/CURRENTUSER", "/TASKS=contextmenu", "/LOG=setup.log" -Wait -PassThru
@@ -65,7 +65,22 @@ jobs:
           (Get-ItemProperty $key).MUIVerb
           (Get-ItemProperty "$key\command").'(default)'
           if (-not (Test-Path "HKCU:\Software\Classes\SystemFileAssociations\.heic\shell\HEICConverter\command")) { throw "heic verb missing" }
-          Start-Process "$app\unins000.exe" -ArgumentList "/VERYSILENT", "/SUPPRESSMSGBOXES" -Wait
+          $silent = "/VERYSILENT", "/SUPPRESSMSGBOXES", "/CURRENTUSER", "/LOG=setup.log"
+          $settings = Join-Path $env:APPDATA "HEICConverter\settings.json"
+          New-Item -ItemType Directory -Force (Split-Path $settings) | Out-Null
+          '{"format": "png"}' | Set-Content $settings
+          # existing install, default mode = update: keeps settings and the menu
+          $p = Start-Process $env:SETUP -ArgumentList $silent -Wait -PassThru
+          if ($p.ExitCode -ne 0) { Get-Content setup.log; throw "update exit $($p.ExitCode)" }
+          if (-not (Test-Path $settings)) { throw "update removed settings" }
+          if (-not (Test-Path "$key\command")) { throw "update lost the right-click menu" }
+          # /MODE=clean: uninstall first, reset settings, install again
+          $p = Start-Process $env:SETUP -ArgumentList ($silent + "/MODE=clean", "/TASKS=contextmenu") -Wait -PassThru
+          if ($p.ExitCode -ne 0) { Get-Content setup.log; throw "clean exit $($p.ExitCode)" }
+          if (Test-Path $settings) { throw "clean reinstall kept settings" }
+          if (-not (Test-Path "$app\HEICConverter.exe")) { throw "clean reinstall missing exe" }
+          # /MODE=uninstall: remove only
+          Start-Process $env:SETUP -ArgumentList ($silent + "/MODE=uninstall") -Wait
           for ($i = 0; $i -lt 60 -and (Test-Path "$app\HEICConverter.exe"); $i++) { Start-Sleep 1 }
           if (Test-Path "$app\HEICConverter.exe") { throw "uninstall left files" }
           if (Test-Path $key) { throw "uninstall left the right-click menu" }
