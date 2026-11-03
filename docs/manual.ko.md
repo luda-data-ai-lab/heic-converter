@@ -112,8 +112,8 @@
 
 ## 8. 라이선스
 - HEIC Converter는 **PolyForm Noncommercial 1.0.0** 라이선스입니다. 개인·학교·비영리 단체 등 **비상업적 용도로만 무료로** 내려받아 쓸 수 있습니다.
-- 판매·재판매, 유료 제품이나 서비스에 포함, 회사 업무용 사용 등 **상업적 이용은 허용되지 않습니다**. 상업적 이용 문의: contact@ludaresearch.org
+- 판매·재판매, 유료 제품이나 서비스에 포함, 회사 업무용 사용 등 **상업적 이용은 허용되지 않습니다**. 상업적 이용 문의: james.jewoo.yeon@gmail.com
 - 원문은 **도움말 → 라이선스** 메뉴와 설치 폴더의 `LICENSE.txt`에서 볼 수 있습니다. 함께 들어 있는 오픈소스 라이브러리(libheif, libde265, Qt 등)의 라이선스는 `THIRD-PARTY-NOTICES.txt`에 있습니다.
 
 ---
-Created by LUDA Research Group · contact@ludaresearch.org
+Created by Devin Amber James Yeon · james.jewoo.yeon@gmail.com

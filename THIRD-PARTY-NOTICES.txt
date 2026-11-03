@@ -32,4 +32,4 @@ with your own builds: install the source version (see README, "개발 환경") w
 library in the Python environment, and rebuild with scripts\build.ps1. The full LGPL-3.0 text is
 at https://www.gnu.org/licenses/lgpl-3.0.txt and the GPL-3.0 text it extends at
 https://www.gnu.org/licenses/gpl-3.0.txt. For a copy of the corresponding source code of any
-LGPL component, use the links above or contact contact@ludaresearch.org.
+LGPL component, use the links above or contact james.jewoo.yeon@gmail.com.

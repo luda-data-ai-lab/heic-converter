@@ -112,8 +112,8 @@ Exit codes: 0 = all converted, 1 = some failed or nothing to convert, 2 = no inp
 
 ## 8. License
 - HEIC Converter is licensed under the **PolyForm Noncommercial License 1.0.0**. You may download and use it **free of charge for noncommercial purposes only** (individuals, schools, nonprofits, etc.).
-- **Commercial use is not permitted**, including selling or reselling it, bundling it into paid products or services, or using it for company work. Commercial inquiries: contact@ludaresearch.org
+- **Commercial use is not permitted**, including selling or reselling it, bundling it into paid products or services, or using it for company work. Commercial inquiries: james.jewoo.yeon@gmail.com
 - Read the full text under **Help → License** or in `LICENSE.txt` in the install folder. Licenses of the bundled open-source libraries (libheif, libde265, Qt, ...) are in `THIRD-PARTY-NOTICES.txt`.
 
 ---
-Created by LUDA Research Group · contact@ludaresearch.org
+Created by Devin Amber James Yeon · james.jewoo.yeon@gmail.com

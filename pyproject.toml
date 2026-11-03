@@ -5,7 +5,7 @@ description = "Batch-convert iPhone HEIC/HEIF photos to JPG/PNG on Windows"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 license = { text = "PolyForm-Noncommercial-1.0.0" }
-authors = [{ name = "LUDA Research Group", email = "contact@ludaresearch.org" }]
+authors = [{ name = "LUDA Research Group", email = "james.jewoo.yeon@gmail.com" }]
 dependencies = [
     "pillow>=11.0,<12",
     "pi-heif>=1.0,<2",
